@@ -1,0 +1,39 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+			.row.banner
+				.col-12
+					h1=pageHeader.title
+					h5=pageHeader.strapline
+			table(class="navTable")
+				tr
+					td 
+						a(href='/') Home
+					td 
+						a(href='/managerInput') Manager Input
+					td
+						a(href='/employeeInput') Employee Input
+					td
+						a(href='/managerRead') Manager Read
+					td
+						a(href='/employeeRead') Employee Read
+			br
+			h4 Mental Healthday History
+			table
+				tr
+					th Employee Name
+					th Days Available
+					th Dates left
+				each employee in employees
+					tr
+						td=employee.name
+						td=employee.daysLeft
+						td
+							each date in employee.datesTaken
+								div=date
+							else
+								div No MHD history

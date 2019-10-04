@@ -1,0 +1,27 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+			h1= title
+			p Welcome to HWI's #{title}
+			br
+			table(class="navTable")
+				tr
+					td 
+						a(href='/') Home
+					td 
+						a(href='/managerInput') Manager Input
+					td
+						a(href='/employeeInput') Employee Input
+					td
+						a(href='/managerRead') Manager Read
+					td
+						a(href='/employeeRead') Employee Read
+
+			footer
+				.row
+					.col-12
+						Created by Dylan Ko, Chris Cathcart, Kyle Moran

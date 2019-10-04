@@ -1,0 +1,48 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+			.row.banner
+				.col-12
+					h1=pageHeader.title
+					h5=pageHeader.strapline
+			table(class="navTable")
+				tr
+					td 
+						a(href='/') Home
+					td 
+						a(href='/managerInput') Manager Input
+					td
+						a(href='/employeeInput') Employee Input
+					td
+						a(href='/managerRead') Manager Read
+					td
+						a(href='/employeeRead') Employee Read
+			br
+			h4 Who gets a mental health day?
+			form(action="/managerInput" method="get" role="form")
+				select(multiple='' name=employeeName)
+					option(value='Employee1') Dylan
+					option(value='Employee2') Chris
+					option(value='Employee3') Kyle
+				select(name=days)
+					option(value='1') 1
+					option(value='2') 2
+					option(value='3') 3
+					option(value='4') 4
+					option(value='5') 5
+				h3 Comment:
+				input(
+					type='text'
+					name='comments'
+				)
+				br
+				input(type='submit' value='Submit')
+			br
+			footer
+				.row
+					.col-12
+						Created by Dylan Ko, Chris Cathcart, Kyle Moran
