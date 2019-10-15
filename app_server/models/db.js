@@ -40,12 +40,12 @@ process.once('SIGUSR2', () => {
 		process.kill(process.pid, 'SIGUSR2');
 	});
 });
-process.once('SIGINT', () => {
+process.on('SIGINT', () => {
 	gracefulShutdown('App termination', () => {
 		process.exit(0);
 	});
 });
-process.once('SIGTERM', () => {
+process.on('SIGTERM', () => {
 	gracefulShutdown('Heroku app shutdown', () => {
 		process.exit(0);
 	});
