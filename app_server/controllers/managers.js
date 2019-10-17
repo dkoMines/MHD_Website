@@ -1,3 +1,4 @@
+const request = require('request');
 /* Get Managers page */
 const managerInput = (req, res) => {
 	res.render('managerInput', { 

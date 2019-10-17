@@ -20,8 +20,24 @@ html
 						a(href='/managerRead') Manager Read
 					td
 						a(href='/employeeRead') Employee Read
+			br
+			br
+			br
+			h3 Managers:
+			each user in users
+				if (user.manager)
+					a(href='/managerInput/')='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
+			h3 Employees:
+			each user in users
+				if (!user.manager)
+					a(href='/employeeInput/')='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
+					br
+					br
+			br
+			br
+			br
 
-			footer
-				.row
-					.col-12
-						Created by Dylan Ko, Chris Cathcart, Kyle Moran
+		footer
+			.row
+				.col-12
+					Created by Dylan Ko, Chris Cathcart, Kyle Moran

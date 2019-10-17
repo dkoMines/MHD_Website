@@ -20,4 +20,5 @@ const mhdUsed = new mongoose.Schema({
 	},
 	comments: String
 });
-mongoose.model('mhdUsed',mhdUsed);
+
+mongoose.model('mhdUsed',mhdUsed,'mhdUsed');

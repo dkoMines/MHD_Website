@@ -16,7 +16,11 @@ const mhdUnused = new mongoose.Schema({
 	dateExpired: {
 		type:Date,
 		required: true
+	},
+	comments: {
+		type:String,
+		required: false
 	}
 });
 
-mongoose.model('mhdUnused',mhdUnused);
+mongoose.model('mhdUnused',mhdUnused,'mhdUnused');

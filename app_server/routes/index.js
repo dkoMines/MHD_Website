@@ -16,4 +16,5 @@ router.get('/managerInput', ctrlManagers.managerInput);
 router.get('/managerRead', ctrlManagers.managerRead);
 
 
+
 module.exports = router;
