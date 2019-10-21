@@ -1,0 +1,38 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+			.row.banner
+				.col-12
+					a(href='/')
+						h1=pageHeader.title
+					p=pageHeader.strapline
+		div
+			.error=message
+			h2='Hello '+currentUser.firstName+' '+currentUser.lastName
+		div(style="width=100%")
+			div(style="width=50%;float:left;margin-right: 10%;display: inline-block")
+				h4 Assign a Mental Health Day?
+				form(action="/managerInput" method="get" role="form")
+					select(multiple='' name=employeeName style="margin-right:10%")
+						each user in users
+							if (!user.manager)
+								option(value=user._id)=user.firstName+" "+user.lastName
+					select(name=days)
+						option(value='1') 1 day
+						option(value='2') 2 days
+						option(value='3') 3 days
+						option(value='4') 4 days
+						option(value='5') 5 days
+					h3 Comment:
+					input(
+						type='text'
+						name='comments'
+					)
+					br
+					input(type='submit' value='Submit')
+			div(style="width=49%;float:left;display: inline-block;")
+				h4 Upcoming Mental Health Days

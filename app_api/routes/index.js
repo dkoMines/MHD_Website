@@ -17,6 +17,16 @@ router
 	.route('/', ctrlMain.index)
 	.get(ctrlMain.showUsers);
 
+router
+	.route('/managers/:userID')
+	.get(ctrlManagers.readUser);
+
+router
+	.route('/employees/:userID')
+	.get(ctrlEmployees.readUser);
+	
+
+
 // Employees
 router
 	.route('/employeeInput')
@@ -25,7 +35,7 @@ router
 
 router
 	.route('/employeeInput/:userID')
-	.get(ctrlEmployees.employeeReadOne)
+	.get(ctrlEmployees.readFutureMHD)
 	.post(ctrlEmployees.employeeInput)
 	.delete(ctrlEmployees.employeeDeleteOne);
 

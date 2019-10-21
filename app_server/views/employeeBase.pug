@@ -1,0 +1,31 @@
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+	body
+		block content
+			.row.banner
+				.col-12
+					a(href='/')
+						h1=pageHeader.title
+					p=pageHeader.strapline
+			br
+		div
+			.error=message
+			h2='Hello '+currentUser.firstName+' '+currentUser.lastName
+		div(style="width=100%")
+			div(style="width=50%;float:left;margin-right: 10%;display: inline-block")
+				-var mhdLeft=mhdFuture.length
+				h4 You have #{mhdLeft} mental health days remaining
+				if (mhdLeft>0)
+					form
+						p Take a mental health day?
+						input(type="date" name="bday")
+						br
+						br
+						input(type="submit")
+			div(style="width=49%;float:left;display: inline-block;")
+				h4 Yipee Yopee
+
+

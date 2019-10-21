@@ -74,6 +74,33 @@ const createMHD = (req, res) => {
 
 };
 
+const readUser = (req, res) => {
+		userDB
+		.findById(req.params.userID)
+		.exec((err, user) => {
+			if (!user) {
+				return res
+					.status(404)
+					.json({
+						"message":"User not found"
+					});
+			} else if (err) {
+				return res
+				.status(404)
+				.json(err);
+			}
+			res
+				.status(200)
+				.json(user);
+		});
+};
 
-module.exports = { managerRead, managerInput, managerReadMHD,
-managerDeleteOne, createMHD };
+
+module.exports = { 
+	managerRead, 
+	managerInput, 
+	managerReadMHD,
+	managerDeleteOne, 
+	createMHD,
+	readUser
+};

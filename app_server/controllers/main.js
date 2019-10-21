@@ -7,19 +7,19 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Used to render the homepage
-const renderIndex = (req, res, responseBody) => {
+const renderIndex = (req, res, responseBody1) => {
 	let message = null;
-	if (!(responseBody instanceof Array)) {
+	if (!(responseBody1 instanceof Array)) {
 		message = 'API Lookup Error';
-		responseBody = [];
+		responseBody1 = [];
 	} else {
-		if (!responseBody.length){
+		if (!responseBody1.length){
 			message = 'No users found';
 		}
 	}
 	res.render('index', { 
 		title: 'Mental Health Day Tracker',
-		users: responseBody, message
+		users: responseBody1, message
 	});
 
 }
@@ -33,12 +33,11 @@ const index = (req, res) => {
 		json: {},
 		qs: {}
 	};
-	console.log(requestUserList.url);
 	request(
 		requestUserList,
 		(err, {statusCode}, body) => {
 			let data = [];
-			if (statusCode === 200 && body.length){
+			if (statusCode === 200 && body.length){  // Catches errors if api didn't return the correct thing
 				data = body;
 			}
 			renderIndex(req, res, data);

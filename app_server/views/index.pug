@@ -23,14 +23,15 @@ html
 			br
 			br
 			br
+			.error=message
 			h3 Managers:
 			each user in users
 				if (user.manager)
-					a(href='/managerInput/')='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
+					a(href='/managers/'+user._id)='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
 			h3 Employees:
 			each user in users
 				if (!user.manager)
-					a(href='/employeeInput/')='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
+					a(href='/employees/'+user._id)='Name: '+user.firstName+' '+user.lastName+' | ID: '+user._id
 					br
 					br
 			br

@@ -1,4 +1,12 @@
 const request = require('request');
+const apiOptions = {
+	server: 'http://localhost:3000' // For development
+};
+if (process.env.NODE_ENV === 'production') {
+	apiOptions.server = 'https://polar-atoll-68892.herokuapp.com'; // Live URL
+}
+
+
 /* Get Managers page */
 const managerInput = (req, res) => {
 	res.render('managerInput', { 
@@ -39,7 +47,84 @@ const managerRead = (req, res) => {
 	});
 };
 
+const renderManagerHome = (req, res,responseBody) => {
+	let message = null;
+	if (!(responseBody instanceof Array)) {
+		message = 'API Lookup Error';
+		responseBody = [];
+	} else {
+		if (!responseBody.length){
+			message = 'User not found';
+		}
+	}
+	body2 = getUsersList();
+	res.render('managerBase', {
+		title: 'Mental Health Days Tracker (Management)',
+		pageHeader: {
+			title: 'HWI',
+			strapline: 'Supply and track mental health days to your employees'
+		},
+		currentUser:responseBody[0],message,
+		users:body2
+	});
+};
+
+
+
+// ============================== Gets list of all users ==================================
+var usersList=[]; // Global var to help pass from request to return
+function setUsersList(info){
+	usersList = info;
+}
+
+function getUsersList(){
+	const pathUsersList = '/api/';
+	const requestUsersList = {
+		url: apiOptions.server + pathUsersList,
+		method: 'GET',
+		json: {},
+		qs: {}
+	};
+	request(
+		requestUsersList,
+		(err, {statusCode}, body) => {
+			let data=[];
+			if (statusCode === 200 && body.length){  // Catches errors if api didn't return the correct thing
+				data = body;
+			}
+			setUsersList(data)
+		}
+	);
+	// console.log(usersList.length);
+	return usersList;
+}
+
+
+
+// ============================== Runs managerHome ==================================
+const managerHome = (req, res) => {
+	const pathPageUser = '/api'+req.originalUrl;
+	const requestUser = {
+		url: apiOptions.server + pathPageUser,
+		method: 'GET',
+		json: {},
+		qs: {}
+	};
+	request(
+		requestUser,
+		(err, {statusCode}, body) => {
+			let data = [];
+			if (statusCode === 200){  // Catches errors if api didn't return the correct thing
+				data.push(body);
+			}
+			renderManagerHome(req, res, data)
+		}
+	);
+};
+
+
 module.exports = {
 	managerInput,
-	managerRead
+	managerRead,
+	managerHome
 };
