@@ -65,7 +65,8 @@ const renderManagerHome = (req, res,responseBody) => {
 			strapline: 'Supply and track mental health days to your employees'
 		},
 		currentUser:responseBody[0],message,
-		users:body2
+		users:body2,
+		// error: req.query.err
 	});
 };
 
@@ -95,7 +96,6 @@ function getUsersList(){
 			setUsersList(data)
 		}
 	);
-	// console.log(usersList.length);
 	return usersList;
 }
 
@@ -121,10 +121,47 @@ const managerHome = (req, res) => {
 		}
 	);
 };
+// ============================ For making a new MHD ====================================
+const addMHD = (req,res) => {
+	const pathPageUser = '/api'+req.originalUrl;
+	let employeeIDsArray = [];
+	if (Array.isArray(req.body.employeeNames)){
+		employeeIDsArray = req.body.employeeNames;
+	} else {
+		employeeIDsArray.push(req.body.employeeNames);
+	}
+	const postdata ={
+		employeeIDs: employeeIDsArray,
+		numDays: parseInt(req.body.days),
+		comment: req.body.comments,
+		managerID: req.params.managerID
+	}
+	const requestOptions = {
+		url: apiOptions.server + pathPageUser,
+		method: 'POST',
+		json: postdata,
+	}
+	// Validation for creating a new MHD. By default, can only give between 1 and 5 days
+	if (!postdata.employeeIDs||1>postdata.numDays||postdata.numDays>5){
+		console.log("Error: Form was not completed correctly");
+		res.redirect(req.originalUrl);
+	} else {
+		request(
+			requestOptions,
+			(err, {statusCode}, managerID) => {
+			if (statusCode === 201) {
+
+			} else {
+
+			}
+		}
+	)};
+}
 
 
 module.exports = {
 	managerInput,
 	managerRead,
-	managerHome
+	managerHome,
+	addMHD
 };

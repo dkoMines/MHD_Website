@@ -63,15 +63,26 @@ const managerRead = (req, res) => { };
 const managerDeleteOne = (req, res) => {};
 
 // Used by .post method
-const createMHD = (req, res) => { 
-	mhdFutureDB.create({
-		managerID: req.params.userID,
-		employeeID: req.body.employeeID,
-		dateAwarded: new Date(ISODate().getTime()),
-		dateExpired: new Date(ISODate().getTime()+1000*60*60*24*365),
-		comments: req.body.comments
-	});
+const createMHD = (req, res) => {
+	var i,j;
+	for (i=0;i<req.body.numDays;i++){
+		for (j=0;j<req.body.employeeIDs.length;j++){
+			console.log("Here1");
+			mhdFutureDB.create({
+				managerID: req.body.managerID,
+				employeeID: req.body.employeeIDs[j],
+				dateAwarded: new Date(),
+				dateExpired: new Date(),
+				comments: req.body.comments
+			});
+			console.log("Here2");
 
+		}
+	}
+	console.log("Here3");
+	res
+		.status(201)
+		.json()
 };
 
 const readUser = (req, res) => {

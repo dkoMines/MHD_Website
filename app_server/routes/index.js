@@ -15,7 +15,12 @@ router.get('/employees/:employeeID',ctrlEmployees.employeeHome);
 /* Manager pages */
 router.get('/managerInput', ctrlManagers.managerInput);
 router.get('/managerRead', ctrlManagers.managerRead);
-router.get('/managers/:managerID',ctrlManagers.managerHome);
+// managerHome
+// router.get('/managers/:managerID',ctrlManagers.managerHome);
+router
+	.route('/managers/:managerID')
+	.get(ctrlManagers.managerHome)
+	.post(ctrlManagers.addMHD)
 
 
 

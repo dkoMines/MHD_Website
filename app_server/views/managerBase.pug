@@ -16,17 +16,17 @@ html
 		div(style="width=100%")
 			div(style="width=50%;float:left;margin-right: 10%;display: inline-block")
 				h4 Assign a Mental Health Day?
-				form(action="/managerInput" method="get" role="form")
-					select(multiple='' name=employeeName style="margin-right:10%")
+				form#managerAddMHD(action="" method="post" role="form")
+					select(multiple='' name='employeeNames' style="margin-right:10%")
 						each user in users
 							if (!user.manager)
 								option(value=user._id)=user.firstName+" "+user.lastName
-					select(name=days)
-						option(value='1') 1 day
-						option(value='2') 2 days
-						option(value='3') 3 days
-						option(value='4') 4 days
-						option(value='5') 5 days
+					select(name='days')
+						option(value=1) 1 day
+						option(value=2) 2 days
+						option(value=3) 3 days
+						option(value=4) 4 days
+						option(value=5) 5 days
 					h3 Comment:
 					input(
 						type='text'

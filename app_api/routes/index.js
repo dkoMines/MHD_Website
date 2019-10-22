@@ -19,12 +19,13 @@ router
 
 router
 	.route('/managers/:userID')
-	.get(ctrlManagers.readUser);
+	.get(ctrlManagers.readUser)
+	.post(ctrlManagers.createMHD);
 
 router
 	.route('/employees/:userID')
 	.get(ctrlEmployees.readUser);
-	
+
 
 
 // Employees
