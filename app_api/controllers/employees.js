@@ -30,6 +30,55 @@ const readUser = (req, res) => {
 		});
 };
 
+const useMHD = (req,res,calDate)=>{
+	mhdFutureDB // Select the MHD that was created first
+	.find({employeeID:req.params.userID})
+	.exec((err,mhds)=>{
+		if (!mhds) {
+			return res
+				.status(404)
+				.json({
+					"message":"No MHDs Found"
+				});
+		} else if (err) {
+			return res
+				.status(404)
+				.json(err);
+		}
+		var selectMHD = mhds[0];
+		for (var i=0;i<mhds.length;i++){
+			if (mhds[i].dateAwarded<selectMHD.dateAwarded){
+				selectMHD = mhds[i];
+			}
+		}
+		// Use select MHD to create used and delete old one
+		mhdFutureDB
+			.findByIdAndRemove(selectMHD._id) // Removes MHD
+		    .exec((err, mhds) => {
+	        if (err) {
+	        	return res
+	            	.status(404)
+	            	.json(err);
+	       	}
+	       	mhdPastDB.create({ // Now adds new event to mhdPast
+	       		// TODO::
+	       		employeeID: selectMHD.employeeID,
+	       		managerID: selectMHD.managerID,
+	       		dateAwarded: selectMHD.dateAwarded,
+	       		dateUsed: req.body.dateTaken,
+	       		comments: ""
+	       	});
+	       	// Should call this res201 but doesn't work
+	       	// This may be because we are doing so many things in this const
+	   //      res
+				// .status(201)
+				// .json();
+
+		});
+		
+	});
+};
+
 const readFutureMHD = (req,res)=>{
 	mhdFutureDB
 	.find({employeeID:req.params.userID})
@@ -57,5 +106,6 @@ module.exports = {
 	employeeReadOne,
 	employeeDeleteOne,
 	readUser,
-	readFutureMHD
+	readFutureMHD,
+	useMHD
 };

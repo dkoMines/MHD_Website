@@ -19,12 +19,18 @@ html
 				-var mhdLeft=mhdFuture.length
 				h4 You have #{mhdLeft} mental health days remaining
 				if (mhdLeft>0)
-					form
+					form#employeeUseMHD(action="" method="post" role="form")
+						if (error=='val')
+							p(style="color:red;background-color:pink") Form not submitted. Please enter a date within the next 7 days.
+						if (correct=='val')
+							p(style="color:green;background-color:lime") Mental Health Day Added
 						p Take a mental health day?
-						input(type="date" name="bday")
+						input(type="date" name="calendar")
 						br
 						br
 						input(type="submit")
+				else
+					p No more mental health days available
 			div(style="width=49%;float:left;display: inline-block;")
 				h4 Yipee Yopee
 

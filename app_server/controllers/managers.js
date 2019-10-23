@@ -66,7 +66,8 @@ const renderManagerHome = (req, res,responseBody) => {
 		},
 		currentUser:responseBody[0],message,
 		users:body2,
-		// error: req.query.err
+		error:req.query.err,
+		created:req.query.cor
 	});
 };
 
@@ -142,17 +143,21 @@ const addMHD = (req,res) => {
 		json: postdata,
 	}
 	// Validation for creating a new MHD. By default, can only give between 1 and 5 days
-	if (!postdata.employeeIDs||1>postdata.numDays||postdata.numDays>5){
+	if (employeeIDsArray.includes(undefined)){
 		console.log("Error: Form was not completed correctly");
-		res.redirect(req.originalUrl);
+		res.redirect('/managers/'+req.params.managerID+'?err=val');
 	} else {
+		let forX = postdata.numDays*employeeIDsArray.length;
 		request(
 			requestOptions,
 			(err, {statusCode}, managerID) => {
 			if (statusCode === 201) {
-
+				res.redirect('/managers/'+req.params.managerID+'?cor='+forX);
+			} else if (statusCode===400){
+				res.redirect('/managers/'+req.params.managerID+'?err=val');
 			} else {
-
+				console.log("Error. Please try again");
+				res.redirect('/managers/'+req.params.managerID+'?err=val');
 			}
 		}
 	)};

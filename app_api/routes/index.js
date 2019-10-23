@@ -20,11 +20,12 @@ router
 router
 	.route('/managers/:userID')
 	.get(ctrlManagers.readUser)
-	.post(ctrlManagers.createMHD);
+	.post(ctrlManagers.createMHD)
 
 router
 	.route('/employees/:userID')
-	.get(ctrlEmployees.readUser);
+	.get(ctrlEmployees.readUser)
+	.post(ctrlEmployees.useMHD)
 
 
 

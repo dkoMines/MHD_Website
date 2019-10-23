@@ -67,7 +67,6 @@ const createMHD = (req, res) => {
 	var i,j;
 	for (i=0;i<req.body.numDays;i++){
 		for (j=0;j<req.body.employeeIDs.length;j++){
-			console.log("Here1");
 			mhdFutureDB.create({
 				managerID: req.body.managerID,
 				employeeID: req.body.employeeIDs[j],
@@ -75,11 +74,8 @@ const createMHD = (req, res) => {
 				dateExpired: new Date(),
 				comments: req.body.comments
 			});
-			console.log("Here2");
-
 		}
 	}
-	console.log("Here3");
 	res
 		.status(201)
 		.json()
