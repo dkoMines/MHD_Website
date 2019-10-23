@@ -10,7 +10,7 @@ const employeeReadOne = (req, res) => { };
 const employeeDeleteOne = (req, res) => { };
 
 const readUser = (req, res) => {
-		userDB
+	userDB
 		.findById(req.params.userID)
 		.exec((err, user) => {
 			if (!user) {
@@ -21,8 +21,8 @@ const readUser = (req, res) => {
 					});
 			} else if (err) {
 				return res
-				.status(404)
-				.json(err);
+					.status(404)
+					.json(err);
 			}
 			res
 				.status(200)
@@ -68,11 +68,9 @@ const useMHD = (req,res,calDate)=>{
 	       		dateUsed: req.body.dateTaken,
 	       		comments: ""
 	       	});
-	       	// Should call this res201 but doesn't work
-	       	// This may be because we are doing so many things in this const
-	   //      res
-				// .status(201)
-				// .json();
+	        res
+				.status(201)
+				.json();
 
 		});
 		

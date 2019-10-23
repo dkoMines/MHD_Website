@@ -135,7 +135,7 @@ const useMHD = (req,res)=>{
 			requestOptions,
 				(err, {statusCode}, employeeID) => {
 				if (statusCode === 201) {
-					res.redirect('/employees/'+req.params.employeeID);
+					res.redirect('/employees/'+req.params.employeeID+'?cor=val');
 				} else if (statusCode===400){
 					res.redirect('/employees/'+req.params.employeeID+'?err=val');
 				} else {
@@ -144,7 +144,6 @@ const useMHD = (req,res)=>{
 				}
 			}
 		);
-		res.redirect('/employees/'+req.params.employeeID+'?cor=val');
 	} else {
 		res.redirect('/employees/'+req.params.employeeID+'?err=val');
 	}
