@@ -21,6 +21,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Defines app_public as a static path
+app.use(express.static(path.join(__dirname, 'app_public')));
+
+
+// Allow for localhost:4200 to access 3000
+app.use('/api', (req,res,next) => {
+	res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	next();
+});
 
 
 app.use('/', indexRouter);

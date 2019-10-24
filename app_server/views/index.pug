@@ -2,9 +2,11 @@ doctype html
 html
 	head
 		title= title
+		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 	body
 		block content
+
 			h1= title
 			p Welcome to HWI's #{title}
 			br
@@ -37,8 +39,19 @@ html
 			br
 			br
 			br
+			p Angular APP!!!!
+			div(style="border:1px solid black")
+				app-home
 
 		footer
 			.row
 				.col-12
 					Created by Dylan Ko, Chris Cathcart, Kyle Moran
+	block scripts
+		script(src='/build/main-es5.919f8711c2514c8bf894.js')
+		script(src='/build/polyfills-es5.2b9ce34c123ac007a8ba.js')
+		script(src='/build/runtime-es5.e8a2810b3b08d6a1b6aa.js')
+		script(src='/build/main-es2015.919f8711c2514c8bf894.js')
+		script(src='/build/polyfills-es2015.0ef207fb7b4761464817.js')
+		script(src='/build/runtime-es2015.e8a2810b3b08d6a1b6aa.js')
+		script(src='/build/styles.3ff695c00d717f2d2a11.css')
