@@ -1,0 +1,18 @@
+<app-page-header [content]="pageContent.header"></app-page-header>
+<div *ngIf="formVisible">
+	<form action="">
+		<input type="date" name="calendar" [(ngModel)]="newMHDDate.newDate"/>
+		<br/>
+		<br/>
+		<input type="submit" >
+	</form>
+	<br/>
+
+</div>
+<button (click)="formVisible=true">Turn On Form</button>
+
+<button (click)="formVisible=false">Turn Off Form</button>
+
+<br/><br/>
+<p>{{newMHDDate.newDate | date}}</p>
+<br/><br/>

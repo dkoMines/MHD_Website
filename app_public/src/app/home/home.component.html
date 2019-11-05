@@ -1,0 +1,23 @@
+<div *ngFor="let user of users" class="card" style="margin-bottom: 1%">
+ <div class="card-block">
+ <div *ngIf="user.manager; else employeeh3"> 
+	<h3> Manager </h3>
+ <h4>
+ 	<a routerLink="/managers/{{user._id}}">{{user.firstName}}</a>
+ </h4>
+</div>
+ <ng-template #employeeh3 >
+	<h3> Employee </h3>
+ <h4>
+ <a routerLink="/employees/{{user._id}}">{{user.firstName}}</a>
+ </h4>
+ </ng-template>
+ <p class="address">High Street, Reading</p>
+ <div class="facilities">
+ 	<!-- How to write a for loop w/ angular -->
+ <span *ngFor="let word of mhdFuture.testingArray" class="badge badge-warning">{{word}}</span>
+ <!-- Piping Can be used to set dates, upper/lower case, currency-->
+ <p> {{mhdFuture.dateAwarded | date}}
+ </div>
+ </div>
+</div>
